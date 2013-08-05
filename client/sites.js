@@ -16,10 +16,10 @@ sites.prototype.routes =   {
 
 };
 
-Sites = sites.prototype;
+Greenlight.Sites = sites.prototype;
 
 console.log("loading sites package");
 
-Greenlight.register_template(name, version, Sites);
+Greenlight.register_template(name, version, Greenlight.Sites);
 
 

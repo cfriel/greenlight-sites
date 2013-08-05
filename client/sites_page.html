@@ -1,42 +1,71 @@
 <template name="sites_page">
   <div>
-  <div class="span3">
-    <ul id="left-navbar" class="nav nav-tabs nav-stacked">
-      {{#each databases}}
-      <li>
-	<a href="#" style="font-weight: bold;">{{name}}</a>
-      </li>
-	  {{#each collections}}
-	  <li><a href="/analytics/{{database}}/{{name}}/">{{name}}</a></li>
-	  {{/each}}
-      {{/each}}
-    </ul>
-  </div>
-
-  <div class="span9">
-    <div id="query">    <form>
-        <textarea id="code" name="code">
-var x = 'dsflk';
-	</textarea>
-      </form>
-    </div>
-
-    <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs" style="margin-bottom: 0px;">
-	<li class="active"><a href="#tab1" data-toggle="tab">Results</a></li>
-	<li><a href="#tab2" data-toggle="tab">Visualization</a></li>
+    <div class="span3">
+      <ul id="left-navbar" class="nav nav-tabs nav-stacked">
+	<li>
+	  <a href="#my_sites" style="font-weight: bold;">My Sites</a>
+	</li>
+	<li>
+	  <a href="#shared_sites" style="font-weight: bold;">Shared Sites</a>
+	</li>
+	<li>
+	  <a href="#trending_sites" style="font-weight: bold;">Trending Sites</a>
+	</li>
       </ul>
-      <div class="tab-content tab-borders">
-	<div class="tab-pane active" id="tab1">
-	  <div id="slick-container" > 
-	  </div>
-	</div>
-	<div class="tab-pane" id="tab2">
-	  <div id="visualization-container">
-	  </div>
-	</div>
+    </div>
+    
+    <div class="span9">
+      <a id="my_sites"/>
+      <div>
+	<table class="table table-hover table-bordered">
+	  <thead>
+	    <tr>
+	      <td>Url</td>
+	      <td>Template</td>
+	      <td>Owner</td>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  {{#each my_sites}}
+	  <tr>
+	    <td>
+	      <a href="/{{url}}">{{url}}</a>
+	    </td>
+	    <td>
+	      {{template}}
+	    </td>
+	    <td>
+	      {{owner}}
+	    </td>
+	  </tr>
+	  {{/each}}
+	  </tbody>
+	</table>
+      </div>
+
+      <a id="shared_sites"/>
+      <div>
+	<table class="table table-hover table-bordered">
+	  <thead>
+	    <tr>
+	      <td>Owner</td>
+	      <td>Url</td>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  {{#each shared_sites}}
+	  <tr>
+	    <td>
+	      {{owner}}
+	    </td>
+	    <td>
+	      <a href="/{{url}}">{{url}}</a>
+	    </td>
+	  </tr>
+	  {{/each}}
+	  </tbody>
+	</table>
       </div>
     </div>
-  </div>
   </div>
 </template>
