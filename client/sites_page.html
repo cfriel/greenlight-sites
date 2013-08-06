@@ -17,11 +17,12 @@
     <div class="span9">
       <a id="my_sites"/>
       <div>
-	<table class="table table-hover table-bordered">
+	<table class="sites-table table table-hover table-bordered">
 	  <thead>
 	    <tr>
 	      <td>Url</td>
 	      <td>Template</td>
+	      <td>Users</td>
 	      <td>Owner</td>
 	    </tr>
 	  </thead>
@@ -34,6 +35,15 @@
 	    <td>
 	      {{template}}
 	    </td>
+	    <td class="user-input-td">
+	      <div>
+		<input type="hidden" class="u" style="width: 100%;">
+		{{#each users}}
+		<option value="{{user}}">{{user}}</option>
+		{{/each}}
+                </input>
+	      </div>
+	    </td>
 	    <td>
 	      {{owner}}
 	    </td>
@@ -45,21 +55,25 @@
 
       <a id="shared_sites"/>
       <div>
-	<table class="table table-hover table-bordered">
+	<table class="sites-table table table-hover table-bordered">
 	  <thead>
 	    <tr>
-	      <td>Owner</td>
 	      <td>Url</td>
+	      <td>Template</td>
+	      <td>Owner</td>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  {{#each shared_sites}}
 	  <tr>
 	    <td>
-	      {{owner}}
+	      <a href="/{{url}}">{{url}}</a>
 	    </td>
 	    <td>
-	      <a href="/{{url}}">{{url}}</a>
+	      {{template}}
+	    </td>
+	    <td>
+	      {{owner}}
 	    </td>
 	  </tr>
 	  {{/each}}

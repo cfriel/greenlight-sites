@@ -1,0 +1,9 @@
+.sites-table thead
+{
+    font-weight: bold;
+}
+
+.sites-table .user-input-td
+{
+    width: 400px;
+}
