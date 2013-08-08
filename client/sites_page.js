@@ -15,11 +15,33 @@ Template.sites_page.site_templates = function()
     return self.templates;
 }
 
+Template.sites_page.owner = function()
+{
+    var self = this;
+    var ownerId = self.owner;
+
+    var owner = Meteor.users.findOne({_id: ownerId});
+    
+    return owner.username;
+}
+
+Template.sites_page.template = function()
+{
+    var self = this;
+    var templateId = self.template;
+
+    var template = SiteTemplates.findOne({_id: templateId});
+    
+    return template.name;
+}
+
 Template.sites_page.user = function()
 {
     var self = this;
 
-    return self.valueOf();
+    // var user = Meteor.users.find({_id: Meteor.Collection.ObjectID(self.valueOf())});
+
+    // return "";
 }
 
 
