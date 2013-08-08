@@ -52,45 +52,89 @@ Template.sites_page.users = function()
     return self.users;
 }
 
+var valuesSearch = function(hash, search)
+{
+    var keys = Object.keys(hash);
+
+    for(var i = 0; i < keys.length; i++)
+    {
+	var key = keys[i];
+	var value = hash[key];
+
+	if(value && typeof(value) == "string")
+	{
+	    if(value.toUpperCase().indexOf(search.toUpperCase()) >= 0)
+	    {
+		return value;
+	    }
+	}
+	else if(value && typeof(value) == "object")
+	{
+	    var findInChild = valuesSearch(value, search)
+	    
+	    if(findInChild)
+	    {
+		return findInChild;
+	    }
+	}
+    }
+
+    return null;
+}
+
 Template.sites_page.rendered = function() 
 {
-    	var select2 = $(".u").select2({
-            minimumInputLength: 1,
-	    multiple: true,
+    var select2 = $("#s").select2({
+        minimumInputLength: 1,
+	multiple: true,
+	
+        query: function (query) {	    
+	    var data = {results: []}, i, j, s;
 	    
-            query: function (query) {	    
-		var data = {results: []}, i, j, s;
-
-		var users = Meteor.users.find().fetch();
-
-		for(var i = 0; i < users.length; i++)
+	    var sites = Sites.find({ owner: Meteor.userId() }).fetch();
+	    
+ 	    for(var i = 0; i < sites.length; i++)
+	    {
+		var url = sites[i].url;
+		var site = sites[i];
+		
+		var templateId = sites[i].template;
+		var userIds = sites[i].users;
+		
+		var template = SiteTemplates.findOne({ _id : templateId});
+		var users = Meteor.users.find({ _id : { $in : userIds}}).fetch();
+		
+		var resSite = valuesSearch(site, query.term);
+		
+		if(resSite)
 		{
-		    var emails = users[i].emails;
-		    var user = users[i];
-
-		    for(var j = 0; j < emails.length; j++)
-		    {   
-			var email = emails[j];
-			var keys = Object.keys(email);
-			
-			for(var k = 0; k < keys.length; k++)
-			{
-			    var key = keys[k];
-			    var item = email[key];
-
-			    if(item && typeof(item) == "string")
-			    {
-				if(query.term.length == 0 || item.toUpperCase().indexOf(query.term.toUpperCase()) >= 0 ){
-				    data.results.push({id: user._id, text: email.address });
-				}
-			    }
-			}	    
-		    }
+		    data.results.push({id: site._id, text: resSite });
+		}
+		
+		var resTemplate = valuesSearch(template, query.term);
+		
+		if(resTemplate)
+		{
+		    data.results.push({id: site._id, text: resTemplate });
 		}
 
-		query.callback(data);
+		var resUsers = valuesSearch(users, query.term);
+		
+		if(resUsers)
+		{
+		    data.results.push({id: site._id, text: resUsers });
+		}
+		
 	    }
-	});
+	    
+	    query.callback(data);
+	    
+	}
+    });
+
+    $('#s').on("change", function(e) { 
+	console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+    });
 
 }
 
