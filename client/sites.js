@@ -3,7 +3,7 @@ var version = "1.0";
 
 sites = function(){};
 
-sites.prototype = new analytics();
+sites.prototype = new Greenlight.Package();
 
 sites.prototype.routes =   {
     
