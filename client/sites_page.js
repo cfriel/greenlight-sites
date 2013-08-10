@@ -138,4 +138,19 @@ Template.sites_page.rendered = function()
 
 }
 
+Template.sites_page.created = function()
+{
+    rendered = false;
+
+    var title = "Sites page loaded";
+    var description = "The created event of the sites page was called";
+    var source = "Template.sites_page";
+    var audience = "";
+    var activity = new Greenlight.Activity(title, description, source, audience);
+
+    activity.save();
+
+}
+
+
 
