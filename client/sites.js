@@ -18,8 +18,11 @@ sites.prototype.routes =   {
 
 Greenlight.Packages.Sites = sites.prototype;
 
-console.log("loading sites package");
+Meteor.startup(function(){
 
-Greenlight.register_template(name, version, Greenlight.Packages.Sites);
+    console.log("loading sites package");
+    
+    Greenlight.register_template(name, version, Greenlight.Packages.Sites);
 
+});
 
