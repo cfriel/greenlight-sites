@@ -26,12 +26,12 @@ sites.prototype.metadata = function()
 }();
 
 
-Greenlight.Sites = sites.prototype;
+Greenlight.Packages.Sites = sites.prototype;
 
 Meteor.startup(function(){
     
     console.log("loading sites package");
 
-    Greenlight.register_template(name, version, Greenlight.Sites);
+    Greenlight.register_template(name, version, Greenlight.Packages.Sites);
         
 });

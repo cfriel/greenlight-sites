@@ -1,11 +1,11 @@
 Template.sites_page.my_sites = function () 
 {
-    return Sites.find({ owner: Meteor.userId() }, {sort: {name: 1}});
+    return Greenlight.Sites.find({ owner: Meteor.userId() }, {sort: {name: 1}});
 };
 
 Template.sites_page.shared_sites = function () 
 {
-    return Sites.find({ users: {$in : [ Meteor.userId()] }}, {sort: {name: 1}});
+    return Greenlight.Sites.find({ users: {$in : [ Meteor.userId()] }}, {sort: {name: 1}});
 };
 
 Template.sites_page.site_templates = function()
@@ -91,7 +91,7 @@ Template.sites_page.rendered = function()
         query: function (query) {	    
 	    var data = {results: []}, i, j, s;
 	    
-	    var sites = Sites.find({ owner: Meteor.userId() }).fetch();
+	    var sites = Greenlight.Sites.find({ owner: Meteor.userId() }).fetch();
 	    
  	    for(var i = 0; i < sites.length; i++)
 	    {
