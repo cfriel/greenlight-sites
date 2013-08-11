@@ -30,7 +30,7 @@ Template.sites_page.template = function()
     var self = this;
     var templateId = self.template;
 
-    var template = SiteTemplates.findOne({_id: templateId});
+    var template = Greenlight.Packages.findOne({_id: templateId});
     
     return template.name;
 }
@@ -101,7 +101,7 @@ Template.sites_page.rendered = function()
 		var templateId = sites[i].template;
 		var userIds = sites[i].users;
 		
-		var template = SiteTemplates.findOne({ _id : templateId});
+		var template = Greenlight.Packages.findOne({ _id : templateId});
 		var users = Meteor.users.find({ _id : { $in : userIds}}).fetch();
 		
 		var resSite = valuesSearch(site, query.term);

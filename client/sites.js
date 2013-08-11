@@ -22,7 +22,7 @@ Meteor.startup(function(){
 
     console.log("loading sites package");
     
-    Greenlight.register_template(name, version, Greenlight.Packages.Sites);
+    Greenlight.register_package(name, version, Greenlight.Packages.Sites);
 
 });
 
