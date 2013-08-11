@@ -146,7 +146,7 @@ Template.sites_page.created = function()
     var description = "The created event of the sites page was called";
     var source = "Template.sites_page";
     var audience = "";
-    var activity = new Greenlight.Activity(title, description, source, audience);
+    var activity = new Greenlight.Activity({title:title, description:description, source:source, audience:audience});
 
     activity.save();
 
