@@ -5,18 +5,6 @@ sites = function(){};
 
 sites.prototype = new sites();
 
-// sites.prototype.routes =   {
-    
-//     // cfriel - to enable server-side rendering
-//     // '/sites': function()
-//     // {
-//     // 	console.log("calling /sites route");
-
-//     // 	return 'sites_page';
-//     // }
-    
-// };
-
 sites.prototype.metadata = function()
 {
     
@@ -30,7 +18,7 @@ Greenlight.Packages.Sites = sites.prototype;
 
 Meteor.startup(function(){
     
-    console.log("loading sites package");
+    Greenlight.log("loading sites package");
 
     Greenlight.register_package(name, version, Greenlight.Packages.Sites);
         

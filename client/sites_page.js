@@ -133,7 +133,7 @@ Template.sites_page.rendered = function()
     });
 
     $('#s').on("change", function(e) { 
-	console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+	Greenlight.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
     });
 
 }

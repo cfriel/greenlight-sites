@@ -9,7 +9,7 @@ sites.prototype.routes =   {
     
     '/sites': function()
     {
-	console.log("calling /sites route");
+	Greenlight.log("calling /sites route");
 
 	return 'sites_page';
     }
@@ -20,7 +20,7 @@ Greenlight.Packages.Sites = sites.prototype;
 
 Meteor.startup(function(){
 
-    console.log("loading sites package");
+    Greenlight.log("loading sites package");
     
     Greenlight.register_package(name, version, Greenlight.Packages.Sites);
 
