@@ -1,6 +1,6 @@
 Template.sites_page.my_sites = function () 
 {
-    return Greenlight.Sites.find({ owner: Meteor.userId() }, {sort: {name: 1}});
+    return Greenlight.Sites.find({ owner: Meteor.userId() }, {sort: {url: 1}});
 };
 
 Template.sites_page.shared_sites = function () 
