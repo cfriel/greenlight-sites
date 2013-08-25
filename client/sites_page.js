@@ -84,57 +84,57 @@ var valuesSearch = function(hash, search)
 
 Template.sites_page.rendered = function() 
 {
-    var select2 = $("#s").select2({
-        minimumInputLength: 1,
-	multiple: true,
+    // var select2 = $("#s").select2({
+    //     minimumInputLength: 1,
+    // 	multiple: true,
 	
-        query: function (query) {	    
-	    var data = {results: []}, i, j, s;
+    //     query: function (query) {	    
+    // 	    var data = {results: []}, i, j, s;
 	    
-	    var sites = Greenlight.Sites.find({ owner: Meteor.userId() }).fetch();
+    // 	    var sites = Greenlight.Sites.find({ owner: Meteor.userId() }).fetch();
 	    
- 	    for(var i = 0; i < sites.length; i++)
-	    {
-		var url = sites[i].url;
-		var site = sites[i];
+    // 	    for(var i = 0; i < sites.length; i++)
+    // 	    {
+    // 		var url = sites[i].url;
+    // 		var site = sites[i];
 		
-		var templateId = sites[i].template;
-		var userIds = sites[i].users;
+    // 		var templateId = sites[i].template;
+    // 		var userIds = sites[i].users;
 		
-		var template = Greenlight.Packages.findOne({ _id : templateId});
-		var users = Meteor.users.find({ _id : { $in : userIds}}).fetch();
+    // 		var template = Greenlight.Packages.findOne({ _id : templateId});
+    // 		var users = Meteor.users.find({ _id : { $in : userIds}}).fetch();
 		
-		var resSite = valuesSearch(site, query.term);
+    // 		var resSite = valuesSearch(site, query.term);
 		
-		if(resSite)
-		{
-		    data.results.push({id: site._id, text: resSite });
-		}
+    // 		if(resSite)
+    // 		{
+    // 		    data.results.push({id: site._id, text: resSite });
+    // 		}
 		
-		var resTemplate = valuesSearch(template, query.term);
+    // 		var resTemplate = valuesSearch(template, query.term);
 		
-		if(resTemplate)
-		{
-		    data.results.push({id: site._id, text: resTemplate });
-		}
+    // 		if(resTemplate)
+    // 		{
+    // 		    data.results.push({id: site._id, text: resTemplate });
+    // 		}
 
-		var resUsers = valuesSearch(users, query.term);
+    // 		var resUsers = valuesSearch(users, query.term);
 		
-		if(resUsers)
-		{
-		    data.results.push({id: site._id, text: resUsers });
-		}
+    // 		if(resUsers)
+    // 		{
+    // 		    data.results.push({id: site._id, text: resUsers });
+    // 		}
 		
-	    }
+    // 	    }
 	    
-	    query.callback(data);
+    // 	    query.callback(data);
 	    
-	}
-    });
+    // 	}
+    // });
 
-    $('#s').on("change", function(e) { 
-	Greenlight.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
-    });
+    // $('#s').on("change", function(e) { 
+    // 	Greenlight.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+    // });
 
 }
 
