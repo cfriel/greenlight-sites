@@ -27,7 +27,7 @@ Template.site_users.rendered = function()
 			if(item && typeof(item) == "string")
 			{
 			    if(query.term.length == 0 || item.toUpperCase().indexOf(query.term.toUpperCase()) >= 0 ){
-				data.results.push({id: user._id, text: email.address });
+				data.results.push({id: user._id, text: user.username });
 			    }
 			}
 		    }	    
@@ -53,4 +53,35 @@ Template.site_users.rendered = function()
     }
 
     select2.select2('data', preload_data);
+
+    var update = function(data){
+
+	var d = data;
+
+	return function(e)
+	{
+	    Greenlight.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+	    
+	    if(e.added)
+	    {
+		var users = d.users;
+		users.push(e.added.id);
+		Greenlight.Sites.update({_id: d._id}, {$set: { users: users}}, function(err)
+					{
+					    Greenlight.log("ok");
+					}
+				       );
+	    }
+	    else if(e.removed)
+	    {
+		var users = d.users;
+		var idx = users.indexOf(e.removed);
+		users.splice(idx, 1);
+		Greenlight.Sites.update({_id: d._id}, {$set: { users: users}});
+	    }
+	};
+    }(this.data);
+    
+    select2.on("change", update);
+
 };
